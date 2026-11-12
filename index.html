@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwasthyaAI (स्वास्थ्यAI) - Multimodal Medical Diagnostics & Prescription Triage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar">
+    <div class="announcement-content">
+      <span class="badge-pulse"></span>
+      <span class="announcement-text" id="announcementText">
+        <strong>INNOVATHON 2026</strong> • Track: Healthcare & Social Impact • Host: FET Agra College × NIMBLUX • <strong>Team CSK</strong> (Rishihood University)
+      </span>
+      <button class="arch-btn" id="openArchModalBtn" title="View System Architecture">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span data-i18n="view_architecture">Architecture & Moat</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <path d="M12 7v6"/>
+            <path d="M9 10h6"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <div class="brand-title">
+            <span>Swasthya</span><span class="brand-accent">AI</span>
+            <span class="brand-devanagari">स्वास्थ्यAI</span>
+          </div>
+          <span class="brand-sub">Bharat Medical Diagnostics & Rx Triage</span>
+        </div>
+      </div>
+
+      <!-- Controls: Language & Audio -->
+      <div class="nav-controls">
+        <div class="lang-selector">
+          <label for="langSelect" class="sr-only">Select Language</label>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <select id="langSelect">
+            <option value="en">English (Default)</option>
+            <option value="hi" selected>हिन्दी (Hindi)</option>
+            <option value="hinglish">Hinglish (हिंग्लिश)</option>
+          </select>
+        </div>
+
+        <button class="icon-toggle-btn" id="ttsGlobalToggle" title="Audio Voiceover Enabled">
+          <svg class="audio-on-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <span class="toggle-text" data-i18n="voice_assist">Voice Mode</span>
+        </button>
+
+        <button class="primary-pill-btn" id="ashaModeBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span data-i18n="asha_mode">ASHA Worker View</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Hero & Problem Statement -->
+  <main class="main-content">
+    
+    <!-- Hero / Problem Banner -->
+    <section class="hero-section">
+      <div class="hero-tagline">
+        <span class="hero-chip" data-i18n="hero_chip">Zero-Hallucination Multimodal Health AI</span>
+        <h1 data-i18n="hero_title">Demystifying Medical Diagnostics & Doctor Prescriptions for Bharat</h1>
+        <p class="hero-desc" data-i18n="hero_desc">
+          Over 70% of Indian citizens cannot decipher pathological reports, and 50% mismanage prescriptions due to cursive handwriting and Latin clinical shorthand. SwasthyaAI delivers instant multimodal triage, vernacular translation, and an exact daily medicine schedule.
+        </p>
+      </div>
+
+      <!-- Live Statistics Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num text-danger">70%+</div>
+          <div class="stat-label" data-i18n="stat_jargon_title">Clinical Jargon Barrier</div>
+          <div class="stat-sub" data-i18n="stat_jargon_desc">Patients panic from search engines over routine lab printouts.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num text-warning">50%</div>
+          <div class="stat-label" data-i18n="stat_shorthand_title">Prescription Mismanagement</div>
+          <div class="stat-sub" data-i18n="stat_shorthand_desc">Rushed handwriting ('1-0-1 AC', 'BD PC') leads to dangerous empty-stomach mixups.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num text-accent">85%</div>
+          <div class="stat-label" data-i18n="stat_lingua_title">Linguistic Divide</div>
+          <div class="stat-sub" data-i18n="stat_lingua_desc">85% speak Hindi & regional tongues; 98% of lab printouts remain strictly in English.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hackathon Quick-Launcher (1-Click Judge Demonstrators) -->
+    <section class="judge-launcher-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span class="section-badge" data-i18n="instant_demo_badge">1-CLICK GRAND FINALE DEMOS</span>
+          <h2 data-i18n="select_scenario_title">Select a Certified Clinical Case or Upload Your Own</h2>
+        </div>
+        <div class="scan-latency-indicator">
+          <span class="pulse-dot"></span>
+          <span data-i18n="latency_tag">Gemini 2.0 Flash Core • Sub-2s Latency</span>
+        </div>
+      </div>
+
+      <div class="sample-cards-grid">
+        <!-- Sample 1 -->
+        <div class="sample-card active" data-sample="sample1">
+          <div class="sample-card-header">
+            <span class="sample-pill pill-alert">🔴 Elevated LFT & Rx</span>
+            <span class="sample-meta">Sample #1 (Official Pitch)</span>
+          </div>
+          <h3 class="sample-heading" data-i18n="sample1_heading">Liver Enzymes & Reflux Rx</h3>
+          <p class="sample-desc" data-i18n="sample1_desc">Bilirubin 2.4 mg/dL, SGPT 68 U/L with Doctor Rx: Pantocid 40mg (OD AC) + Metformin (BD PC).</p>
+          <div class="sample-footer">
+            <span class="author-tag">Patient: Ramesh Sharma (48Y)</span>
+            <button class="load-sample-btn" data-i18n="btn_load_case">Load Case →</button>
+          </div>
+        </div>
+
+        <!-- Sample 2 -->
+        <div class="sample-card" data-sample="sample2">
+          <div class="sample-card-header">
+            <span class="sample-pill pill-danger">🔴 Critical Diabetes</span>
+            <span class="sample-meta">Sample #2</span>
+          </div>
+          <h3 class="sample-heading" data-i18n="sample2_heading">Diabetic & Lipid Crisis</h3>
+          <p class="sample-desc" data-i18n="sample2_desc">HbA1c 9.2%, Fasting Sugar 188 mg/dL with Glycomet GP (1-0-1 PC) and Atorvastatin (0-0-1 HS).</p>
+          <div class="sample-footer">
+            <span class="author-tag">Patient: Sunita Devi (56Y)</span>
+            <button class="load-sample-btn" data-i18n="btn_load_case">Load Case →</button>
+          </div>
+        </div>
+
+        <!-- Sample 3 -->
+        <div class="sample-card" data-sample="sample3">
+          <div class="sample-card-header">
+            <span class="sample-pill pill-emergency">🚨 Emergency Drop</span>
+            <span class="sample-meta">Sample #3</span>
+          </div>
+          <h3 class="sample-heading" data-i18n="sample3_heading">CBC Dengue Platelet Emergency</h3>
+          <p class="sample-desc" data-i18n="sample3_desc">Platelets 42,000 /µL (Critical low) + Dengue NS1 Positive with Dolo 650 SOS & Caripill 1-1-1.</p>
+          <div class="sample-footer">
+            <span class="author-tag">Patient: Aman Gupta (23Y)</span>
+            <button class="load-sample-btn" data-i18n="btn_load_case">Load Case →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ingestion & Upload Console -->
+    <section class="ingestion-console">
+      <div class="ingestion-card">
+        <div class="tabs-header">
+          <button class="tab-btn active" data-tab="preview"><span data-i18n="tab_report_view">Active Case Input</span></button>
+          <button class="tab-btn" data-tab="upload"><span data-i18n="tab_custom_upload">Upload New Report / Photo</span></button>
+          <button class="tab-btn" data-tab="decoder"><span data-i18n="tab_shorthand_dictionary">Doctor Rx Shorthand Decrypter</span></button>
+        </div>
+
+        <!-- Tab 1: Preview Active Case Input -->
+        <div class="tab-content active" id="tab-preview">
+          <div class="raw-preview-split">
+            <div class="raw-pane">
+              <div class="pane-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <span class="pane-title" data-i18n="pane_lab_title">Pathology Lab Diagnostic Printout</span>
+              </div>
+              <pre class="raw-terminal" id="rawLabText">Loading diagnostic text...</pre>
+            </div>
+
+            <div class="raw-pane">
+              <div class="pane-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14h6"/><path d="M9 18h6"/><path d="M9 10h6"/></svg>
+                <span class="pane-title" data-i18n="pane_rx_title">Doctor Prescription (Handwritten / Latin Shorthand)</span>
+              </div>
+              <pre class="raw-terminal rx-font" id="rawRxText">Loading prescription text...</pre>
+            </div>
+          </div>
+
+          <div class="action-bar-center">
+            <button class="primary-scan-btn" id="runTriageBtn">
+              <svg class="scan-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="9" x2="12" y2="15"/></svg>
+              <span data-i18n="btn_run_triage">Execute Multimodal Vision Triage</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab 2: Custom Upload & Camera -->
+        <div class="tab-content" id="tab-upload">
+          <div class="upload-dropzone" id="dropZone">
+            <div class="dropzone-icon">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <h4 data-i18n="dropzone_title">Drop your Blood Report or Prescription Photo here</h4>
+            <p data-i18n="dropzone_sub">Supports JPG, PNG, and PDF medical summaries. Contrast normalization applied automatically.</p>
+            <div class="upload-actions">
+              <label class="btn-file-upload">
+                <input type="file" id="fileInput" accept="image/*,.pdf" style="display:none;">
+                <span data-i18n="btn_browse_files">Browse Files</span>
+              </label>
+              <button class="btn-camera" id="cameraBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                <span data-i18n="btn_take_photo">Camera Scan</span>
+              </button>
+            </div>
+            <div id="uploadPreviewContainer" class="upload-preview-container hidden">
+              <img id="uploadedImagePreview" src="" alt="Report Preview" class="preview-thumb">
+              <div class="preview-details">
+                <span id="previewFileName" class="preview-name">report.jpg</span>
+                <span class="preview-status" data-i18n="ready_to_parse">Ready for Vision OCR Pipeline</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Prescription Decrypter Explorer -->
+        <div class="tab-content" id="tab-decoder">
+          <div class="decoder-intro">
+            <h4 data-i18n="decoder_title">Deciphering Indian Clinical Shorthand into Vernacular Clarity</h4>
+            <p data-i18n="decoder_sub">Test how SwasthyaAI maps Latin medical shorthand and dosage numbers into exact hourly food schedules.</p>
+          </div>
+          <div class="decoder-interactive">
+            <div class="decoder-input-group">
+              <input type="text" id="quickDeccodeInput" placeholder="Type doctor shorthand: e.g. '1-0-1 AC', 'BD PC', 'TDS', 'HS', 'SOS'" value="1-0-1 AC">
+              <button id="quickDecodeBtn" class="pill-submit" data-i18n="btn_decode">Decode Shorthand</button>
+            </div>
+            <div id="quickDecodeResult" class="decode-result-box">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Scan Animation Overlay (Simulating Multimodal OCR & Contrast Normalization) -->
+    <div class="scan-anim-wrapper hidden" id="scanAnimWrapper">
+      <div class="scan-hud">
+        <div class="laser-scanner"></div>
+        <div class="hud-status">
+          <div class="spinner-medical"></div>
+          <div class="hud-messages">
+            <span class="hud-step active" id="hudStep1">⚙️ Normalizing image contrast & cursive skew...</span>
+            <span class="hud-step" id="hudStep2">🔬 Extracting biochemical parameters (Bilirubin, SGPT, HbA1c)...</span>
+            <span class="hud-step" id="hudStep3">💊 Parsing Indian doctor shorthand ('OD AC', '1-0-1')...</span>
+            <span class="hud-step" id="hudStep4">🛡️ Enforcing certified reference JSON schema...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRIAGE DASHBOARD (The Result Section) -->
+    <section class="triage-dashboard" id="triageDashboard">
+      
+      <!-- Patient Banner -->
+      <div class="patient-id-strip">
+        <div class="patient-primary">
+          <span class="patient-avatar">👤</span>
+          <div>
+            <h3 id="patientNameDisplay">Ramesh Sharma, 48Y / Male</h3>
+            <span class="patient-sub" id="patientMetaDisplay">Pathology: Dr. Lal PathLabs • Ref Doctor: Dr. A. K. Verma</span>
+          </div>
+        </div>
+        <div class="action-buttons-group">
+          <button class="action-btn" id="speakSummaryBtn" title="Listen in Hindi or English">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            <span data-i18n="btn_listen_audio">🔊 Listen in Hindi</span>
+          </button>
+          <button class="action-btn" id="printReportBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span data-i18n="btn_print">Print / PDF</span>
+          </button>
+          <button class="action-btn whatsapp-action" id="whatsappSimBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/></svg>
+            <span data-i18n="btn_whatsapp">Send WhatsApp Timetable</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Overall Triage Alert Banner -->
+      <div class="overall-triage-card" id="overallTriageCard">
+        <div class="triage-status-pill" id="overallStatusBadge">
+          <span class="status-indicator"></span>
+          <span id="overallStatusText">TRIAGE ALERT</span>
+        </div>
+        <div class="triage-summary-body">
+          <p id="overallSummaryText" class="triage-lead-summary">
+            Evaluating laboratory values...
+          </p>
+          <div class="voice-audio-status" id="voiceStatusBadge" style="display:none;">
+            <span class="sound-wave"></span>
+            <span id="voiceStatusText">Playing audio explanation...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION A: TRAFFIC-LIGHT BIOMARKER CARDS -->
+      <div class="dashboard-block">
+        <div class="block-header">
+          <div class="block-title-wrap">
+            <span class="feature-tag" data-i18n="feature1_tag">KEY FEATURE 2</span>
+            <h3 data-i18n="biomarkers_title">Biomarker Traffic-Light Triage</h3>
+            <p class="block-subtitle" data-i18n="biomarkers_subtitle">Numerical lab values mathematically calculated against certified reference ranges. Zero hallucination.</p>
+          </div>
+          <div class="triage-legend">
+            <span class="legend-item"><span class="legend-dot dot-normal"></span><span data-i18n="legend_normal">Normal (Healthy)</span></span>
+            <span class="legend-item"><span class="legend-dot dot-warning"></span><span data-i18n="legend_warning">Borderline Check</span></span>
+            <span class="legend-item"><span class="legend-dot dot-alert"></span><span data-i18n="legend_alert">Alert (Doctor Review)</span></span>
+          </div>
+        </div>
+
+        <!-- Dynamic Biomarkers Container -->
+        <div class="biomarkers-grid" id="biomarkersContainer">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- SECTION B: SMART MEDICATION SCHEDULE & PRESCRIPTION DECODER -->
+      <div class="dashboard-block">
+        <div class="block-header">
+          <div class="block-title-wrap">
+            <span class="feature-tag" data-i18n="feature4_tag">KEY FEATURE 4</span>
+            <h3 data-i18n="meds_title">Chronological Daily Medication Timetable</h3>
+            <p class="block-subtitle" data-i18n="meds_subtitle">Doctor shorthand (OD AC, BD PC, 1-0-1) decoded into exact clock times and food rules.</p>
+          </div>
+          <div class="adherence-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="adherence_tag">Prevents Empty-Stomach Medication Mistakes</span>
+          </div>
+        </div>
+
+        <!-- Medication Timeline -->
+        <div class="meds-timeline-container" id="medsTimelineContainer">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- SECTION C: DOCTOR-FIRST DIALOGUE QUESTIONS -->
+      <div class="dashboard-block doctor-dialogue-block">
+        <div class="block-header">
+          <div class="block-title-wrap">
+            <span class="feature-tag tag-blue" data-i18n="safety_tag">DOCTOR-FIRST ETHICS</span>
+            <h3 data-i18n="doc_dialogue_title">Questions to Ask Your Doctor at Next Visit</h3>
+            <p class="block-subtitle" data-i18n="doc_dialogue_subtitle">Curated medical dialogue prompts generated strictly from your abnormal test biomarkers.</p>
+          </div>
+        </div>
+
+        <div class="doctor-questions-list" id="doctorQuestionsContainer">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- SECTION D: ETHICAL SAFETY & ABDM COMPLIANCE FOOTER -->
+      <div class="ethics-disclaimer-card">
+        <div class="disclaimer-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="disclaimer-content">
+          <h4 data-i18n="ethics_title">Strict Medical Safety & Ethical Non-Diagnostic Disclaimer</h4>
+          <p data-i18n="ethics_body">
+            SwasthyaAI is an educational health-literacy companion designed for patient triaging and comprehension across Bharat. It strictly enforces certified reference range checks and decodes existing doctor instructions. It never autonomously alters dosages or prescribes unprescribed drugs. Always consult a certified MBBS physician for clinical diagnosis.
+          </p>
+          <div class="compliance-badges">
+            <span class="chip-cert">ABDM (Ayushman Bharat) Architecture Ready</span>
+            <span class="chip-cert">Zero-Autonomous Prescription Guardrail</span>
+            <span class="chip-cert">Certified Biomarker Reference Schema</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ARCHITECTURE & COMPETITIVE MOAT MODAL (FOR JUDGES) -->
+  <div class="modal-backdrop hidden" id="archModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-chip">INNOVATHON 2026 • ARCHITECTURAL BLUEPRINT</span>
+          <h3>Why SwasthyaAI Wins Over General LLMs (ChatGPT / Raw Gemini)</h3>
+        </div>
+        <button class="close-modal-btn" id="closeArchModalBtn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- 3 Pillars Comparison -->
+        <div class="moat-grid">
+          <div class="moat-card">
+            <div class="moat-num">01</div>
+            <h4>Hallucination vs. Mathematical Precision</h4>
+            <p><strong>Raw LLMs:</strong> Guess medical advice and frequently hallucinate reference ranges.</p>
+            <p><strong>SwasthyaAI:</strong> Strict JSON schema enforces mathematical comparison of extracted values against laboratory reference intervals. Zero hallucination.</p>
+          </div>
+          <div class="moat-card">
+            <div class="moat-num">02</div>
+            <h4>500-Word Essay vs. Instant Triage UI</h4>
+            <p><strong>Raw LLMs:</strong> Return dense clinical walls of text that terrify anxious rural or elderly patients.</p>
+            <p><strong>SwasthyaAI:</strong> Visual 🟢 Normal, 🟡 Borderline, and 🔴 Alert cards with visual range gauges and audio voiceovers.</p>
+          </div>
+          <div class="moat-card">
+            <div class="moat-num">03</div>
+            <h4>Indian Prescription Shorthand Tuning</h4>
+            <p><strong>Raw LLMs:</strong> Stumble on messy Indian cursive handwriting and Latin abbreviations ('1-0-1 AC', 'BD PC', 'TDS').</p>
+            <p><strong>SwasthyaAI:</strong> Regex & Multimodal Vision tuned specifically for Indian doctor handwriting and food prerequisite schedules.</p>
+          </div>
+        </div>
+
+        <!-- Revenue Model for NIMBLUX & Diagnostics -->
+        <div class="business-model-box">
+          <h4>Sustainable B2B & B2C Revenue Model</h4>
+          <div class="biz-cols">
+            <div class="biz-col">
+              <h5>B2B Pathology Diagnostic Partnerships</h5>
+              <p>Pathology chains (Dr. Lal PathLabs, Thyrocare, SRL) pay a micro-fee per report to print a SwasthyaAI dynamic QR code directly onto patient reports.</p>
+            </div>
+            <div class="biz-col">
+              <h5>Frontline ASHA Worker Enablement</h5>
+              <p>Equips rural primary health workers with bilingual instant triaging to explain reports to illiterate villagers in their native dialect.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team CSK Info -->
+        <div class="team-footer">
+          <h5>Built with ❤️ by Team CSK (Rishihood University)</h5>
+          <p>Rakshit Malik (Team Leader) • Amrit Sagar • Gauransh Gautam • Lakshay Kaushik</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP NOTIFICATION SIMULATOR MODAL -->
+  <div class="modal-backdrop hidden" id="whatsappModal">
+    <div class="modal-dialog modal-small">
+      <div class="modal-header whatsapp-header">
+        <div class="wa-user-info">
+          <span class="wa-avatar">🟢</span>
+          <div>
+            <h4>SwasthyaAI WhatsApp Health Alert</h4>
+            <span>Twilio & ABDM Cloud Service (Live Simulation)</span>
+          </div>
+        </div>
+        <button class="close-modal-btn" id="closeWhatsappModalBtn">&times;</button>
+      </div>
+      <div class="modal-body wa-chat-bg">
+        <div class="wa-bubble" id="whatsappMessageBubble">
+          <!-- Injected via JS -->
+        </div>
+        <div class="wa-action-row">
+          <button class="btn-wa-dismiss" id="dismissWhatsappBtn">Close Simulator</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <strong>SwasthyaAI (स्वास्थ्यAI)</strong> — Healthcare & Social Impact Prototype
+      </div>
+      <div class="footer-team">
+        <span>Team CSK • Rishihood University • FET Agra College × NIMBLUX</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="mockData.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
